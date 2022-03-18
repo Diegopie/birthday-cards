@@ -1,5 +1,5 @@
 const noteRouter = require('express').Router();
-const { DianaNote } = require('../../models');
+const { BooNote } = require('../../models');
 
 // * Print Errors and Create Response Object 
 const handleError = (message, route, err, msgError) => {
@@ -16,14 +16,14 @@ const handleError = (message, route, err, msgError) => {
 
 // * Create New Note
 noteRouter.post('/new', (req, res) => {
-    const note = new DianaNote(req.body);
+    const note = new BooNote(req.body);
     note.save(err => {
         if (err) res.status(500).json(
-            handleError('Error Saving Note in Database', '/api/diana-note/new', err, true)
+            handleError('Error Saving Note in Database', '/api/boo-note/new', err, true)
         );
         else {
             res.status(200).json(
-                handleError('Successfully Saved Note', '/api/diana-note/new', err, false)
+                handleError('Successfully Saved Note', '/api/boo-note/new', err, false)
             );
         }
     });
@@ -31,9 +31,9 @@ noteRouter.post('/new', (req, res) => {
 
 // ** Get All Notes
 noteRouter.get('/all', (req, res) => {
-    DianaNote.find({}, (err, notes) => {
+    BooNote.find({}, (err, notes) => {
         if (err) res.status(500).json(
-            handleError('Error Has Occurred in Database Search', '/api/diana-note/all', err, true)
+            handleError('Error Has Occurred in Database Search', '/api/boo-note/all', err, true)
         );
         
         if (notes) res.status(400).json(

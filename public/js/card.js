@@ -3,7 +3,7 @@ let currentClass = "note-fest"
 
 // I keep getting bad request response but the data comes threw in the error???
 $.ajax({
-    url: '/api/diana-note/all',
+    url: '/api/boo-note/all',
     type: "GET",
     dataType: "json",
     success: (data) => {

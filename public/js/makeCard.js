@@ -70,7 +70,7 @@ $('#submit').click(async e => {
     } else {
         // *** Pass Validation: MAke POST
         $('.note-msg').addClass('poof');
-        const noteRequest = await fetch('/api/diana-note/new', {
+        const noteRequest = await fetch('/api/boo-note/new', {
             headers: {
                 'Content-Type': 'application/json'
             },

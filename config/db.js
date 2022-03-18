@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 async function db() {
     try {
-        mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/diana-bday', {
+        mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/boothang-bday', {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false,
