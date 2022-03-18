@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/fav/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/fav/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/card.css">
+    <!-- <link rel="stylesheet" href="/css/background.css"> -->
+    <link rel="stylesheet" href="/css/moon.css">
+    <title>B-Day Card!</title>
+</head>
+
+<body>
+    <!-- Lights Animation -->
+    <!-- <div id="what-im-doing"></div>
+    <div id="dont-know"></div> -->
+    <div class="background-container">
+        <img class="moon" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/moon2.png" alt="">
+        <div class="stars"></div>
+        <div class="twinkling"></div>
+        <div class="clouds"></div>
+    </div>
+    <main>
+        <section class="row makeCard-nav">
+            <h1 class="col-sm-12 col-md-8"> Happy Birthday </h1>
+            <div class="col-sm-10 col-md-3">
+                <a class="button" href="/"> View Cards!</a>
+            </div>
+        </section>
+        <section class='row' id='makeCard-contain'>
+            <article class="col-4 note-card note-fest" id="change">
+                <h2>Text Color</h2>
+                <textarea class="note" placeholder="Write your note here!"></textarea>
+                <textarea class="signature" placeholder="Write your name here!"></textarea>
+                <img class="img" src="/img/card/festival-01.png">
+            </article>
+            <article class="col-4 note-card note-settings">
+                <div>
+                    <h2>Choose a Theme!</h2>
+                    <button class="button" id="fest"> Festival </button>
+                    <button class="button" id="horror"> Horror </button>
+                    <button class="button" id="daemon"> Daemon </button>
+                    <button class="button" id="zodiac"> Zodiac </button>
+                </div>
+            </article>
+        </section>
+        <section class="row makeCard-submit">
+            <button class="button" id="submit" href=""> Send Card! </button>
+            <article class="note-msg poof">
+                <p class="col">Your Note Cannot Be Empty!</p>
+            </article>
+        </section>
+        <section class="row makeCard-homeBtn">
+            <a class="button" href="/"> Return Home </a>
+        </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="/js/makeCard.js"></script>
+</body>
+
+</html>
