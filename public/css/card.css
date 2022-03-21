@@ -1,9 +1,9 @@
 /* HTML Elements */
 body {
-    padding: 10px 20px;
-    margin: 10px 20px;
+    /* padding: 10px 20px;
+    margin: 10px 20px; */
     color: white;
-    background-color: transparent;
+    background-color: #9ded72;
 }
 
 h1 {
@@ -14,27 +14,125 @@ a {
     color: inherit;
 }
 
+.button {
+    background-color: rgba(255, 255, 255, 0.8);;
+    border: solid;
+    color: black;
+    border-radius: 8px;
+    padding: 7px 32px;
+    text-align: center;
+    display: inline-block;
+    margin: 4px 2px;
+}
+  .button:hover {
+    color: purple !important;
+  }
+
+/* Make Card Nav */
+.makeCard-nav{ 
+    justify-content: space-evenly;
+}
+
+/* Make Card */
+#makeCard-contain {
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+/* Write Card */
+
+.text-height {
+    height: 180px;
+    font-size: 36px;
+}
+
+/* Note Settings */
+.note-settings {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px 38px 20px 38px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Submit/Validate */
+.makeCard-submit { 
+    justify-content: center;
+    z-index: 10;
+}
+
+.note-msg {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 28px 18px 20px 10px;
+    border-radius: 8px;
+    color: black;
+    margin-left: 20px;
+    text-align: center;
+}
+
+.poof {
+    display: none;
+}
+
+/* Bottom Nav */
+.makeCard-homeBtn { 
+    margin-top: 40px;
+    justify-content: center;
+    z-index: 10;
+}
+
 /* * Note Styling */
 .note-card {
     min-width: 300px;
     min-height: 150px;
+    max-width: 440px;
     margin: 25px 10px;
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    border-radius: 8px;
+    font: 3vmin/1.0 Serif;
+}
+
+
+/* Note Styling */
+.parseText {
+    white-space: pre-wrap;
+      word-wrap: break-word;
+}
+
+.note {
+    width: 100%;
+}
+
+.signature {
+    width: 100%;
+}
+
+.img {
+    width: 100%;
+    height: 70px;
+}
+
+.modal-card {
+    min-width: 300px;
+    min-height: 150px;
+    margin: 25px 10px;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
     border-radius: 8px;
     font: 3vmin/1.0 Serif;
 }
 
 /*  ** User Selections */
-/* Festival */
-.note-fest {
-    background-color: rgba(20, 166, 7, 0.8);
-    color: rgb(89, 4, 110)
+/* Fall */
+.note-fall {
+    background-color: rgba(228, 246, 60, 0.876);
+    color: rgb(173, 131, 15);
 }
 
-.note-fest-solid {
-    background-color: rgba(20, 166, 7, 1.0);
-    color: rgb(89, 4, 110);
+.note-fall-solid {
+    background-color: rgba(228, 246, 60, 1.0);
+    color: rgb(173, 131, 15);
 }
 
 /* Horror */
@@ -69,83 +167,13 @@ a {
     color: white
 }
 
-/* Element Styles */
+/* View Notes Page */
 
-.img {
-    width: 100%;
-    height: 70px;
-}
-
-.button {
-    background-color: rgba(255, 255, 255, 0.8);;
-    border: solid;
-    color: black;
-    border-radius: 8px;
-    padding: 7px 32px;
-    text-align: center;
-    display: inline-block;
-    margin: 4px 2px;
-  }
-
-  .button:hover {
-    color: purple !important;
-  }
-
-
-/* For Make Card Page */
-#makeCard-contain {
-      align-items: center;
-      justify-content: space-evenly;
-  }
-
-.makeCard-nav{ 
-    justify-content: space-evenly;
-}
-
-/* Yeah yeah yeah, redundant but the classes are being targeted in the js. Deal with it  */
-.note {
-    width: 100%;
-}
-
-.signature {
-    width: 100%;
-}
-
-.note-settings {
-    color: black;
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 10px 38px 20px 38px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.makeCard-submit { 
+#card-contain {
+    display: flex;
+    flex-flow: row wrap;
     justify-content: center;
-    z-index: 10;
-}
-
-.makeCard-homeBtn { 
-    margin-top: 40px;
-    justify-content: center;
-    z-index: 10;
-}
-
-.note-msg {
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 28px 18px 20px 10px;
-    border-radius: 8px;
-    color: black;
-    margin-left: 20px;
-    text-align: center;
-}
-
-.poof {
-    display: none;
-}
-
-.parseText {
-    white-space: pre-wrap;
-      word-wrap: break-word;
+    align-items: center;
 }
 
 
@@ -162,42 +190,6 @@ a {
         min-height: 380px;
         transition: 350ms;
     }
+
 }
 
-
-/* Fix Cards on Small Screens */
-@media only screen and (max-width: 320px) {
-    .note-card  {
-        min-width: 260px;
-    }
-}
-
-
-/* For Responsive Large Screens */
-@media only screen and (min-width: 1900px) {
-    body {
-        padding-left: 200px;
-        padding-right: 200px;
-    }
-}
-
-@media only screen and (min-width: 2260px) {
-    body {
-        padding-left: 400px;
-        padding-right: 400px;
-    }
-}
-
-@media only screen and (min-width: 2660px) {
-    body {
-        padding-left: 650px;
-        padding-right: 650px;
-    }
-}
-
-@media only screen and (min-width: 3160px) {
-    body {
-        padding-left: 800px;
-        padding-right: 800px;
-    }
-}

@@ -80,6 +80,16 @@ background-color: black;
       word-wrap: break-word;
   }
 
+  .modal-card {
+    min-width: 600px;
+    min-height: 150px;
+    margin: 25px 10px;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    border-radius: 8px;
+    font: 3vmin/1.0 Serif;
+}
+
 
   /*  Things kept breaking apart as the screen got longer so  I made a trillion media queries to control it. Images kept growing larger than their container and the return home button just floated in the center of the cards */
   @media only screen and (min-width: 576px) {

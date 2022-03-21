@@ -1,20 +1,20 @@
 // * Stores Current Class Being Rendered to Correctly Target and Replace Styles
-let currentClass = "note-fest"
-// * Default Styling to Send to DB, Listeners Will Update this Value
-let dbStyle = ["note-fest", "festival-01.png"]
+let currentClass = "note-fall"
+//fall Default Styling to Send to DB, Listeners Will Update this Value
+let dbStyle = ["note-fall", "fall-01.png"]
 const imgPath = "/img/card/"
 
 // * Event Listeners For Theme
-// ** Festival: Remove Current Styling and Apply Festival Class and Image
-$('#fest').click((e) => {
+// ** fall: Remove Current Styling and Apply fall Class and Image
+$('#fall').click((e) => {
     e.preventDefault();
     // Change Color
     $('#change').removeClass(currentClass);
-    $('#change').addClass("note-fest");
-    currentClass = "note-fest"; 
+    $('#change').addClass("note-fall");
+    currentClass = "note-fall"; 
     // Change Image
-    $('.img').attr('src', imgPath + 'festival-01.png')
-    dbStyle = ["note-fest", "festival-01.png"]
+    $('.img').attr('src', imgPath + 'fall-01.png')
+    dbStyle = ["note-fall", "fall-01.png"]
 });
 
 // ** Horror: Remove Current Styling and Apply Horror Class and Image
