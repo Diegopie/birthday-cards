@@ -86,15 +86,18 @@ a {
     min-width: 300px;
     min-height: 150px;
     max-width: 440px;
+    max-height: 580px;
+    /* height: 580px; */
     margin: 25px 10px;
-    /* display: flex; */
-    /* flex-wrap: wrap; */
+    display: flex;
+    flex-flow: row wrap;
     border-radius: 8px;
     font: 3vmin/1.0 Serif;
 }
 
 
 /* Note Styling */
+
 .parseText {
     white-space: pre-wrap;
       word-wrap: break-word;
@@ -111,6 +114,7 @@ a {
 .img {
     width: 100%;
     height: 70px;
+    margin-bottom: 10px;
 }
 
 .modal-card {
@@ -175,6 +179,15 @@ a {
     justify-content: center;
     align-items: center;
 }
+
+.center { 
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
 
 
 /* Fix Make Cards on Big Screens */

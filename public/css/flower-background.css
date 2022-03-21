@@ -122,6 +122,6 @@
        top:-10%;
     }
     100%{transform:rotate(720deg);
-         top: 200%;
+         top: 100%;
     }
 }
