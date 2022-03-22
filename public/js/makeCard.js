@@ -4,6 +4,16 @@ let currentClass = "note-fall"
 let dbStyle = ["note-fall", "fall-01.png"]
 const imgPath = "/img/card/"
 
+// * Update TextBox Size
+
+$('textarea').each(function() {
+    this.setAttribute('style', 'min-height: ' + (this.scrollHeight) + "px; overflow-y: hidden;")
+}).on('input', function() {
+    this.style.height = 'auto';
+    this.style.height = (this.scrollHeight) + 'px';
+});
+    //   .each() applies your code to each instance of the param
+
 // * Event Listeners For Theme
 // ** fall: Remove Current Styling and Apply fall Class and Image
 $('#fall').click((e) => {
@@ -97,6 +107,7 @@ $('#submit').click(async e => {
         }
     }
 });
+
 
 
 // ** this can be used to make cards editable on the user's device. Save UUID to local storage and whatever they make will have that ID saved

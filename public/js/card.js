@@ -9,7 +9,7 @@ $.ajax({
     success: (data) => {
         console.log(data.responseJSON.notes);
     },
-    error: (error) => {
+    error: (error) => {        
         console.log(error);
         // console.log(error.responseJSON.notes);
         const noteData = error.responseJSON.notes
@@ -45,6 +45,8 @@ $.ajax({
                 `
                 $('#card-contain').prepend(newNote)
             }
+            // * With All Cards Appended, Change CSS Var for Flowers to Fall Through Entire Page
+            document.body.style.setProperty('--flower-height', (document.body.scrollHeight) + 'px');
         });
         // ** Modal
         const solid = '-solid'
