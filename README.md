@@ -8,10 +8,9 @@ Card Ideas
 
 To Do
 - Redo modal from portfolio
-- grow textbox on input
-- Save note to local storage (add not that draft saved)
 - Note From Me Section (In Create Card Page)
 - Make h1 link to / route and update font
+- store theme choice in draft
 
 
 /* Modal Size */

@@ -4,40 +4,48 @@ let currentClass = "note-fall"
 let dbStyle = ["note-fall", "fall-01.png"]
 const imgPath = "/img/card/"
 
+
 // * Update TextBox Size
 
-$('textarea').each(function() {
-    this.setAttribute('style', 'min-height: ' + (this.scrollHeight) + "px; overflow-y: hidden;")
-}).on('input', function() {
-    this.style.height = 'auto';
-    this.style.height = (this.scrollHeight) + 'px';
-});
-    //   .each() applies your code to each instance of the param
+const setLocal = () => {
+    localStorage.setItem(
+        'noteDraft', JSON.stringify({
+            'note': $('.note').val(),
+            'signature': $('.signature').val(),
+            'style': currentClass,
+        })
+    );
+    $('#draftMsg').text('Draft Saved!');
+}
 
 // * Event Listeners For Theme
 // ** fall: Remove Current Styling and Apply fall Class and Image
-$('#fall').click((e) => {
-    e.preventDefault();
+const setFall = (e) => {
+    // e.preventDefault();
     // Change Color
     $('#change').removeClass(currentClass);
     $('#change').addClass("note-fall");
-    currentClass = "note-fall"; 
+    currentClass = "note-fall";
     // Change Image
-    $('.img').attr('src', imgPath + 'fall-01.png')
-    dbStyle = ["note-fall", "fall-01.png"]
-});
+    $('.img').attr('src', imgPath + 'fall-01.png');
+    dbStyle = ["note-fall", "fall-01.png"];
+    setLocal();
+}
+$('#fall').click(setFall);
 
-// ** Horror: Remove Current Styling and Apply Horror Class and Image
-$('#horror').click((e) => {
-    e.preventDefault();
+// ** Succulents: Remove Current Styling and Apply Succulents Class and Image
+const setSucculent = (e) => {
+    // e.preventDefault();
     // Change Color
     $('#change').removeClass(currentClass);
-    $('#change').addClass("note-horror");
-    currentClass = "note-horror"; 
+    $('#change').addClass("note-succulents");
+    currentClass = "note-succulents";
     // Change Image
-    $('.img').attr('src', imgPath + 'horror-01.png')
-    dbStyle = ["note-horror", "horror-01.png"]
-});
+    $('.img').attr('src', imgPath + 'succulents-01.png')
+    dbStyle = ["note-succulents", "succulents-01.png"];
+    setLocal();
+}
+$('#succulents').click(setSucculent);
 
 // ** Daemon: Remove Current Styling and Apply Daemon Class and Image
 $('#daemon').click((e) => {
@@ -45,7 +53,7 @@ $('#daemon').click((e) => {
     // Change Color
     $('#change').removeClass(currentClass);
     $('#change').addClass("note-daemon");
-    currentClass = "note-daemon"; 
+    currentClass = "note-daemon";
     // Change Image
     $('.img').attr('src', imgPath + 'daemon-02.png');
     dbStyle = ["note-daemon", "daemon-02.png"];
@@ -57,7 +65,7 @@ $('#zodiac').click((e) => {
     // Change Color
     $('#change').removeClass(currentClass);
     $('#change').addClass("note-zodiac");
-    currentClass = "note-zodiac"; 
+    currentClass = "note-zodiac";
     // Change Image
     $('.img').attr('src', imgPath + 'zodiac-01.png');
     dbStyle = ["note-zodiac", "zodiac-01.png"];
@@ -72,8 +80,8 @@ $('#submit').click(async e => {
     const userSignature = document.querySelector('.signature').value;
     // ** Validation
     if (!userNote) {
-       $('.note-msg').text('Your Note Cannot Be Empty!');
-       $('.note-msg').removeClass('poof');
+        $('.note-msg').text('Your Note Cannot Be Empty!');
+        $('.note-msg').removeClass('poof');
     } else if (!userSignature) {
         $('.note-msg').text('Your Signature Cannot Be Empty!');
         $('.note-msg').removeClass('poof');
@@ -101,13 +109,46 @@ $('#submit').click(async e => {
             // *** POST Success
             $('.note-msg').text("Your Note Was Sent!");
             $('.note-msg').removeClass('poof');
-            $('#submit').addClass('poof');            
+            $('#submit').addClass('poof');
             const redirect = `<a class="col button" href="/"> Click To View Your Card!</a>`
             $('.note-msg').append(redirect);
         }
     }
 });
 
+
+// * Check Local Storage for a Draft
+// !! The fck, none of this works
+function checkLocal() {
+    const noteDraft = JSON.parse(localStorage.getItem('noteDraft'));
+    console.log(noteDraft);
+    if (noteDraft === null) {
+        return;
+    }
+    $('.note').val(noteDraft.note);
+    $('.signature').val(noteDraft.signature);
+    console.log(noteDraft.style);
+    switch (noteDraft.style) {
+        case 'note-fall':
+            setFall();
+            break;
+        case 'note-succulents':
+            console.log('hits');
+            setSucculent();
+            break;
+    }
+    $('#draftMsg').text('Draft Found!');
+}
+checkLocal();
+
+
+$('textarea').each(function () {
+    this.setAttribute('style', 'min-height: ' + (this.scrollHeight) + "px; overflow-y: hidden;")
+}).on('input', function () {
+    this.style.height = 'auto';
+    this.style.height = (this.scrollHeight) + 'px';
+    setLocal();
+});
 
 
 // ** this can be used to make cards editable on the user's device. Save UUID to local storage and whatever they make will have that ID saved
