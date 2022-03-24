@@ -112,6 +112,7 @@ $('#submit').click(async e => {
             $('#submit').addClass('poof');
             const redirect = `<a class="col button" href="/"> Click To View Your Card!</a>`
             $('.note-msg').append(redirect);
+            // localStorage.clear();
         }
     }
 });
