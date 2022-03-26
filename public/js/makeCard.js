@@ -47,29 +47,33 @@ const setSucculent = (e) => {
 }
 $('#succulents').click(setSucculent);
 
-// ** Daemon: Remove Current Styling and Apply Daemon Class and Image
-$('#daemon').click((e) => {
-    e.preventDefault();
+// ** Dream Builder: Remove Current Styling and Apply Dream Builder Class and Image
+const setDreamBuilder = (e) => {
+    // e.preventDefault();
     // Change Color
     $('#change').removeClass(currentClass);
-    $('#change').addClass("note-daemon");
-    currentClass = "note-daemon";
+    $('#change').addClass("note-dreamBuilder");
+    currentClass = "note-dreamBuilder";
     // Change Image
-    $('.img').attr('src', imgPath + 'daemon-02.png');
-    dbStyle = ["note-daemon", "daemon-02.png"];
-});
+    $('.img').attr('src', imgPath + 'dreamBuilder-01.png');
+    dbStyle = ["note-dreamBuilder", "dreamBuilder-01.png"];
+    setLocal();
+}
+$('#dreamBuilder').click(setDreamBuilder);
 
 // ** Age of Empire: Remove Current Styling and Apply Age of Empire Class and Image
-$('#zodiac').click((e) => {
+const setFieryAries = (e) => {
     e.preventDefault();
     // Change Color
     $('#change').removeClass(currentClass);
-    $('#change').addClass("note-zodiac");
-    currentClass = "note-zodiac";
+    $('#change').addClass("note-fieryAries");
+    currentClass = "note-fieryAries";
     // Change Image
-    $('.img').attr('src', imgPath + 'zodiac-01.png');
-    dbStyle = ["note-zodiac", "zodiac-01.png"];
-});
+    $('.img').attr('src', imgPath + 'fieryAries-01.png');
+    dbStyle = ["note-fieryAries", "fieryAries-01.png"];
+    setLocal();
+}
+$('#fieryAries').click(setFieryAries);
 
 // * Submit Listener: Validate textareas; Make POST Req; Handle Success and Fail
 $('#submit').click(async e => {
@@ -136,6 +140,12 @@ function checkLocal() {
         case 'note-succulents':
             console.log('hits');
             setSucculent();
+            break;
+        case 'note-dreamBuilder':
+            setDreamBuilder();
+            break;
+        case 'note-fieryAries':
+            setFieryAries();
             break;
     }
     $('#draftMsg').text('Draft Found!');

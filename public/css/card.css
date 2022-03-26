@@ -105,7 +105,9 @@ a {
     border-radius: 8px;
     font: 3vmin/1.0 Serif;
 }
-
+    .note-preview {
+        max-height: none;
+    }
 
 /* Note Styling */
 
@@ -162,23 +164,23 @@ a {
     color: rgb(245, 239, 66)
 }
 
-/* Daemon */
-.note-daemon {
-    background-color: rgba(204, 150, 14, 0.9);
-    color: rgb(122, 13, 1);
+/* Dream Builder */
+.note-dreamBuilder {
+    background-color: rgba(75, 115, 145, 0.9);
+    color: rgb(255, 255, 255);
 }
 
-.note-daemon-solid {
-    background-color: rgba(204, 150, 14, 1.0);
-    color: rgb(122, 13, 1);
+.note-dreamBuilder-solid {
+    background-color: rgba(75, 115, 145, 1.0);
+    color: rgb(255, 255, 255);
 }
-/* Zodiac */
-.note-zodiac {
+/* Fiery Aries */
+.note-fieryAries {
     background-color: rgba(5, 5, 5, 0.8);
     color: white
 }
 
-.note-zodiac-solid {
+.note-fieryAries-solid {
     background-color: rgba(5, 5, 5, 1.0);
     color: white
 }
