@@ -176,13 +176,13 @@ a {
 }
 /* Fiery Aries */
 .note-fieryAries {
-    background-color: rgba(5, 5, 5, 0.8);
-    color: white
+    background-color: rgba(253, 211, 113, 0.8);
+    color: rgb(2197, 116, 64);
 }
 
 .note-fieryAries-solid {
-    background-color: rgba(5, 5, 5, 1.0);
-    color: white
+    background-color: rgba(253, 211, 113, 1.0);
+    color: rgb(2197, 116, 64);
 }
 
 /* View Notes Page */

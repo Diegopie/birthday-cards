@@ -63,7 +63,7 @@ $('#dreamBuilder').click(setDreamBuilder);
 
 // ** Age of Empire: Remove Current Styling and Apply Age of Empire Class and Image
 const setFieryAries = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     // Change Color
     $('#change').removeClass(currentClass);
     $('#change').addClass("note-fieryAries");
