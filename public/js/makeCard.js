@@ -150,6 +150,7 @@ function checkLocal() {
     }
     $('#draftMsg').text('Draft Found!');
 }
+
 checkLocal();
 
 
@@ -161,20 +162,3 @@ $('textarea').each(function () {
     setLocal();
 });
 
-
-// ** this can be used to make cards editable on the user's device. Save UUID to local storage and whatever they make will have that ID saved
-// ** update DB doc to use a client generated ID
-// ** Generate, save, and get id from local storage
-// ** Attach ID to noteRequest
-// ** Make a get request to find user's create note's
-// ** create edit and delete routes in backend
-// function createUUID() {
-//     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-//        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-//        return v.toString(16);
-//     });
-//  }
-
-//  console.log(createUUID())
-//  console.log(createUUID())
-//  console.log(createUUID())

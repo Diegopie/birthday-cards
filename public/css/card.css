@@ -192,6 +192,10 @@ a {
 
 /* View Notes Page */
 
+#about {
+    color: orange
+}
+
 #card-contain {
     width: 100%;
     display: flex;
@@ -208,6 +212,18 @@ a {
     align-items: center;
 }
 
+.About-Text {
+    color: black;
+    font-family: cursive;
+}
+
+.About-Img-Container {
+    justify-content: space-evenly;
+}
+
+.About-Img {
+    margin-top: 8px;
+}
 
 
 /* Fix Make Cards on Big Screens */
