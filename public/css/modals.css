@@ -1,0 +1,14 @@
+.About-Text {
+    color: black;
+    font-family: cursive;
+}
+
+.About-Img-Container {
+    justify-content: space-evenly;
+}
+
+.About-Img {
+    margin-top: 8px;
+    max-width: 300px;
+    max-height: 300px;
+}
