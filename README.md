@@ -7,16 +7,8 @@ Card Ideas
 - Diamonds
 
 To Do
-- Redo modal from portfolio
-- Note From Me Section (In Create Card Page)
+- About Modal Background color
+- flower rain height issue with small amount of notes; (may have to compare viewport hieght cs scroll heigt) window.innerHeight
 - Make h1 link to / route and update font
-- store theme choice in draft
-
-
-/* Modal Size */
-@media only screen and (min-width: 767px) {
-    .modal-card {
-        min-width: 600px;
-    }
-
-}
+- clear local on card submit
+- redo bs modal for viewing cards

@@ -46,7 +46,17 @@ $.ajax({
                 $('#card-contain').prepend(newNote)
             }
             // * With All Cards Appended, Change CSS Var for Flowers to Fall Through Entire Page
-            document.body.style.setProperty('--flower-height', (document.body.scrollHeight) + 'px');
+
+            const scrollHt = document.body.scrollHeight;
+            const viewHt = window.innerHeight;
+
+            if (viewHt > scrollHt) {
+                document.body.style.setProperty('--flower-height', (viewHt) + 'px');
+            } else {
+                document.body.style.setProperty('--flower-height', (scrollHt) + 'px');
+            }
+
+            
         });
         // ** Modal
         const solid = '-solid'
