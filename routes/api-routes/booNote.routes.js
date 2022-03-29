@@ -42,4 +42,32 @@ noteRouter.get('/all', (req, res) => {
     });
 });
 
+// ** Get All Notes
+noteRouter.put('/edit', (req, res) => {
+    // console.log(req.body);
+    const {id, note, signature } = req.body;
+    // console.log({id, note, signature });
+     BooNote.findByIdAndUpdate(
+        { _id: id },
+        { $set: { note: note, signature: signature}},
+        { new: true },
+        (err, note) => {
+            if (err) res.status(500).json(
+                handleError('Error Has Occurred in Database Search', '/api/boo-note/all', err, true)
+            );
+            console.log(note)
+        }
+    )
+    // BooNote.findByIdAndUpdate(id, (err, notes) => {
+    //     if (err) res.status(500).json(
+    //         handleError('Error Has Occurred in Database Search', '/api/boo-note/all', err, true)
+    //     );
+    //     console.log(notes)
+        
+    //     // if (notes) res.status(400).json(
+    //     //     { notes }
+    //     // )
+    // });
+});
+
 module.exports = noteRouter;

@@ -24,7 +24,7 @@ $.ajax({
                     >
                         <h2 class="note">${note.note.substring(0, 150)} —</h2>
                         <h6> Click Photo For Full Note </h6>
-                        <h4 class="signature">- ${note.signature}</h4>
+                        <h4 class="signature"> ${note.signature}</h4>
                         <img 
                             class="img" src="/img/card/${note.style[1]}"
                         >
@@ -37,7 +37,7 @@ $.ajax({
                         class="col-8 col-md-4 col-lg-2 note-card ${note.style[0]} parseText" data-id="${note._id}" data-text="${note.note}" data-local-id="${note.localID}"
                     >
                         <h2 class="note">${note.note} </h2>
-                        <h4 class="signature">- ${note.signature}</h4>
+                        <h4 class="signature"> ${note.signature}</h4>
                         <img 
                             class="img" src="/img/card/${note.style[1]}"
                         >
@@ -51,9 +51,9 @@ $.ajax({
             const viewHt = window.innerHeight;
 
             if (viewHt > scrollHt) {
-                document.body.style.setProperty('--flower-height', (viewHt) + 'px');
+                document.body.style.setProperty('--flower-height', (viewHt - 10) + 'px');
             } else {
-                document.body.style.setProperty('--flower-height', (scrollHt) + 'px');
+                document.body.style.setProperty('--flower-height', (scrollHt -10) + 'px');
             }
 
             
