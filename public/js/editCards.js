@@ -56,11 +56,14 @@ $.ajax({
                 method: 'PUT'
             });
             const noteResponse = await updateRequest.json();
+            console.log(noteResponse);
             if (noteResponse.message.msgError) {
+                console.log('err');
                 $('.note-msg').text("Your Note Couldn't Be Sent! Refresh and Try Again 😐");
                 $('.note-msg').removeClass('poof');
             } else {
                 // *** POST Success
+                console.log($('.note-msg'));
                 $('.note-msg').text("Your Note Was Sent!");
                 $('.note-msg').removeClass('poof');
                 $('#submit').addClass('poof');

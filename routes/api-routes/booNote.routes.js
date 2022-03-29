@@ -55,19 +55,13 @@ noteRouter.put('/edit', (req, res) => {
             if (err) res.status(500).json(
                 handleError('Error Has Occurred in Database Search', '/api/boo-note/all', err, true)
             );
-            console.log(note)
+            if (note) {
+                res.status(200).json(
+                    handleError('Successfully Saved Note', '/api/boo-note/new', err, false)
+                );
+            }
         }
     )
-    // BooNote.findByIdAndUpdate(id, (err, notes) => {
-    //     if (err) res.status(500).json(
-    //         handleError('Error Has Occurred in Database Search', '/api/boo-note/all', err, true)
-    //     );
-    //     console.log(notes)
-        
-    //     // if (notes) res.status(400).json(
-    //     //     { notes }
-    //     // )
-    // });
 });
 
 module.exports = noteRouter;
