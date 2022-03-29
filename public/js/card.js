@@ -1,5 +1,6 @@
 const siteURL = window.location.origin;
 let currentClass = "note-fest"
+const isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
 
 // I keep getting bad request response but the data comes threw in the error???
 $.ajax({
@@ -49,13 +50,21 @@ $.ajax({
 
             const scrollHt = document.body.scrollHeight;
             const viewHt = window.innerHeight;
+            if (isMobile) {
+                if (viewHt > scrollHt) {
+                    document.body.style.setProperty('--flower-height', (viewHt) + 'px');
+                } else {
+                    document.body.style.setProperty('--flower-height', (scrollHt) + 'px');
+                }
+              } else {
+                if (viewHt > scrollHt) {
+                    document.body.style.setProperty('--flower-height', (viewHt - 28) + 'px');
+                } else {
+                    document.body.style.setProperty('--flower-height', (scrollHt - 28) + 'px');
+                }
+              }
 
-            if (viewHt > scrollHt) {
-                document.body.style.setProperty('--flower-height', (viewHt - 10) + 'px');
-            } else {
-                document.body.style.setProperty('--flower-height', (scrollHt -10) + 'px');
-            }
-
+           
             
         });
         // ** Modal
