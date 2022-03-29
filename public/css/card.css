@@ -20,7 +20,7 @@ a {
 }
 
 .button {
-    background-color: rgba(255, 255, 255, 0.8);;
+    background-color: rgba(117, 173, 201, 0.8);;
     border: solid;
     color: black;
     border-radius: 8px;
@@ -32,6 +32,11 @@ a {
   .button:hover {
     color: purple !important;
   }
+
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
 
 
 /* Make Card Nav */
@@ -66,7 +71,7 @@ a {
 /* Note Settings */
 .note-settings {
     color: black;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(154, 197, 88, 0.8);
     padding: 10px 38px 20px 38px;
     border-radius: 8px;
     text-align: center;
@@ -79,7 +84,7 @@ a {
 }
 
 .note-msg {
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(154, 197, 88, 0.8);
     padding: 28px 18px 20px 10px;
     border-radius: 8px;
     color: black;
@@ -194,7 +199,7 @@ a {
 /* View Notes Page */
 
 #about {
-    color: orange
+    /* color: orange; */
 }
 
 #card-contain {

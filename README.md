@@ -7,8 +7,3 @@ Card Ideas
 - Diamonds
 
 To Do
-- About Modal Background color
-- flower rain height issue with small amount of notes; (may have to compare viewport hieght cs scroll heigt) window.innerHeight
-- Make h1 link to / route and update font
-- clear local on card submit
-- redo bs modal for viewing cards
