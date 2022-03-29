@@ -12,6 +12,10 @@ const BooNoteSchema = new mongoose.Schema({
     style: {
         type: Array,
         required: true,
+    },
+    localID: {
+        type: String,
+        required: true,
     }
 });
 

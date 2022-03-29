@@ -2,10 +2,18 @@
 let currentClass = "note-fall"
 //fall Default Styling to Send to DB, Listeners Will Update this Value
 let dbStyle = ["note-fall", "fall-01.png"]
-const imgPath = "/img/card/"
+const imgPath = "/img/card/";
+const dbID = checkLocalID();
 
 
 // * Update TextBox Size
+
+function createUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
 
 const setLocal = () => {
     localStorage.setItem(
@@ -99,7 +107,8 @@ $('#submit').click(async e => {
             body: JSON.stringify({
                 note: userNote,
                 signature: userSignature,
-                style: dbStyle
+                style: dbStyle,
+                localID: dbID
             }),
             method: 'POST'
         });
@@ -116,20 +125,20 @@ $('#submit').click(async e => {
             $('#submit').addClass('poof');
             const redirect = `<a class="col button" href="/"> Click To View Your Card!</a>`
             $('.note-msg').append(redirect);
-            localStorage.clear();
+            localStorage.removeItem('noteDraft');
         }
     }
 });
 
 
 // * Check Local Storage for a Draft
-// !! The fck, none of this works
 function checkLocal() {
     const noteDraft = JSON.parse(localStorage.getItem('noteDraft'));
-    console.log(noteDraft);
+    // console.log(noteDraft);
     if (noteDraft === null) {
         return;
     }
+    // Place Local Text in textarea 
     $('.note').val(noteDraft.note);
     $('.signature').val(noteDraft.signature);
     console.log(noteDraft.style);
@@ -152,6 +161,19 @@ function checkLocal() {
 }
 
 checkLocal();
+
+// Check Local For UUID
+function checkLocalID() {
+    const localID = localStorage.getItem('id');
+    console.log(localID);
+    if (localID === null) {
+        const newID = createUUID()
+        console.log(newID);
+        localStorage.setItem('id', newID);
+        return newID;
+    }
+    return localID;
+}
 
 
 $('textarea').each(function () {
