@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const BooNoteSchema = new mongoose.Schema({
+const BooNote24Schema = new mongoose.Schema({
     note: {
         type: String,
         required: true
@@ -19,6 +19,6 @@ const BooNoteSchema = new mongoose.Schema({
     }
 });
 
-const BooNote = mongoose.model('Boo-Note', BooNoteSchema);
+const BooNote24 = mongoose.model('Boo-Note-24', BooNote24Schema);
 
-module.exports = BooNote;
+module.exports = BooNote24;

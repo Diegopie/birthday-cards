@@ -1,5 +1,5 @@
 const noteRouter = require('express').Router();
-const { BooNote } = require('../../models');
+const { BooNote24 } = require('../../models');
 
 // * Print Errors and Create Response Object 
 const handleError = (message, route, err, msgError) => {
@@ -16,7 +16,7 @@ const handleError = (message, route, err, msgError) => {
 
 // * Create New Note
 noteRouter.post('/new', (req, res) => {
-    const note = new BooNote(req.body);
+    const note = new BooNote24(req.body);
     note.save(err => {
         if (err) res.status(500).json(
             handleError('Error Saving Note in Database', '/api/boo-note/new', err, true)
@@ -31,7 +31,7 @@ noteRouter.post('/new', (req, res) => {
 
 // ** Get All Notes
 noteRouter.get('/all', (req, res) => {
-    BooNote.find({}, (err, notes) => {
+    BooNote24.find({}, (err, notes) => {
         if (err) res.status(500).json(
             handleError('Error Has Occurred in Database Search', '/api/boo-note/all', err, true)
         );
@@ -47,7 +47,7 @@ noteRouter.put('/edit', (req, res) => {
     // console.log(req.body);
     const {id, note, signature } = req.body;
     // console.log({id, note, signature });
-     BooNote.findByIdAndUpdate(
+     BooNote24.findByIdAndUpdate(
         { _id: id },
         { $set: { note: note, signature: signature}},
         { new: true },

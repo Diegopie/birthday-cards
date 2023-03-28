@@ -91,6 +91,35 @@ background-color: black;
 }
 
 
+/* Scroll Bar */
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(212, 199, 199);
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  @media (min-width: 1000px) {
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+  }
+
+
   /*  Things kept breaking apart as the screen got longer so  I made a trillion media queries to control it. Images kept growing larger than their container and the return home button just floated in the center of the cards */
   @media only screen and (min-width: 576px) {
 	.step {

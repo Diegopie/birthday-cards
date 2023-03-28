@@ -69,7 +69,7 @@ const setDreamBuilder = (e) => {
 }
 $('#dreamBuilder').click(setDreamBuilder);
 
-// ** Age of Empire: Remove Current Styling and Apply Age of Empire Class and Image
+// ** FieryAries: Remove Current Styling and Apply FieryAries Class and Image
 const setFieryAries = (e) => {
     // e.preventDefault();
     // Change Color
@@ -82,6 +82,20 @@ const setFieryAries = (e) => {
     setLocal();
 }
 $('#fieryAries').click(setFieryAries);
+
+// ** FieryAries: Remove Current Styling and Apply FieryAries Class and Image
+const setEarthyFriends = (e) => {
+    // e.preventDefault();
+    // Change Color
+    $('#change').removeClass(currentClass);
+    $('#change').addClass("note-earthyFriends");
+    currentClass = "note-earthyFriends";
+    // Change Image
+    $('.img').attr('src', imgPath + 'earthyFriends-01.png');
+    dbStyle = ["note-earthyFriends", "earthyFriends-01.png"];
+    setLocal();
+}
+$('#earthyFriends').click(setEarthyFriends);
 
 // * Submit Listener: Validate textareas; Make POST Req; Handle Success and Fail
 $('#submit').click(async e => {

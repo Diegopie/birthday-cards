@@ -1,4 +1,4 @@
 module.exports = {
-    BooNote: require('./BooNote'),
+    BooNote24: require('./BooNote24'),
     // admin: require('./Admin')
 };

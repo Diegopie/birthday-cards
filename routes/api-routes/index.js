@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const booNote = require('./booNote.routes');
+const booNote24 = require('./booNote.routes');
 // const admin = require('./admin.routes');
 
-router.use('/api/boo-note', booNote);
+router.use('/api/boo-note', booNote24);
 // router.use('/api/admin', admin);
 
 

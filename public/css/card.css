@@ -214,6 +214,16 @@ a:hover {
     background-color: rgba(253, 211, 113, 1.0);
     color: rgb(2197, 116, 64);
 }
+/* Earthy Friend */
+.note-earthyFriends {
+    background-color: rgba(253, 211, 113, 0.8);
+    color: rgb(2197, 116, 64);
+}
+
+.note-earthyFriends-solid {
+    background-color: rgba(253, 211, 113, 1.0);
+    color: rgb(2197, 116, 64);
+}
 
 /* View Notes Page */
 
@@ -237,6 +247,34 @@ a:hover {
     align-items: center;
 }
 
+
+/* Scroll Bar */
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(212, 199, 199);
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  @media (min-width: 1000px) {
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+  }
 
 /* Fix Make Cards on Big Screens */
 @media only screen and (min-width: 1000px) {
