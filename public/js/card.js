@@ -10,7 +10,7 @@ $.ajax({
     success: (data) => {
         console.log(data.responseJSON.notes);
     },
-    error: (error) => {        
+    error: (error) => {
         console.log(error);
         // console.log(error.responseJSON.notes);
         const noteData = error.responseJSON.notes
@@ -46,28 +46,65 @@ $.ajax({
                 `
                 $('#card-contain').prepend(newNote)
             }
-            // * With All Cards Appended, Change CSS Var for Flowers to Fall Through Entire Page
-
-            const scrollHt = document.body.scrollHeight;
-            const viewHt = window.innerHeight;
-            if (isMobile) {
-                if (viewHt > scrollHt) {
-                    document.body.style.setProperty('--flower-height', (viewHt) + 'px');
-                } else {
-                    document.body.style.setProperty('--flower-height', (scrollHt) + 'px');
-                }
-              } else {
-                if (viewHt > scrollHt) {
-                    document.body.style.setProperty('--flower-height', (viewHt - 28) + 'px');
-                } else {
-                    document.body.style.setProperty('--flower-height', (scrollHt - 28) + 'px');
-                }
-              }
-
-           
-            
         });
-        // ** Modal
+
+        // * With All Cards Appended, Change CSS Var for Flowers to Fall Through Entire Page
+
+        const flowerPetals = [
+            { flowerName: '--flower-1-speed', flowerSpeed: 7, },
+            { flowerName: '--flower-2-speed', flowerSpeed: 4, },
+            { flowerName: '--flower-3-speed', flowerSpeed: 10, },
+            { flowerName: '--flower-4-speed', flowerSpeed: 4, },
+            { flowerName: '--flower-5-speed', flowerSpeed: 10, },
+            { flowerName: '--flower-6-speed', flowerSpeed: 4.5, },
+        ]
+
+
+
+        const viewHt = window.innerHeight;
+        const scrollHt = document.body.scrollHeight;
+        const calc = scrollHt / viewHt;
+        console.log(calc);
+
+        const setFlowerSpeed = (calc) => {
+            flowerPetals.forEach((petal, index) => {
+                // const targetPetal = i + 1;
+                console.log(petal.flowerName);
+                console.log(petal.flowerSpeed);
+                petal.flowerSpeed = petal.flowerSpeed * calc
+                document.body.style.setProperty(petal.flowerName, `${petal.flowerSpeed}s`);
+
+            });
+            console.log(flowerPetals);
+
+        }
+
+
+        // * Check if this is a mobile device
+        if (isMobile) {
+            // Set CSS var of how far in dom flowers will fall if view port is larger than content scroll height (not enough notes to scroll)
+            if (viewHt > scrollHt) {
+                document.body.style.setProperty('--flower-height', (viewHt) + 'px');
+                return;
+            }
+            // Else, set CSS var to scroll height and adjust the speed of flower petal animation
+            document.body.style.setProperty('--flower-height', (scrollHt) + 'px');
+            setFlowerSpeed(calc);
+
+        } else {
+            // Apply same updates if not mobile (I don't know why I did this. It seems to subtrack the height for some reason 🤷‍♂️)
+            if (viewHt > scrollHt) {
+                document.body.style.setProperty('--flower-height', (viewHt - 28) + 'px');
+                return;
+
+            }
+            document.body.style.setProperty('--flower-height', (scrollHt - 28) + 'px');
+            setFlowerSpeed(calc);
+
+        }
+
+
+        // ** Modal {This does not work in bs5!}
         const solid = '-solid'
         $(".img").click((e) => {
             e.preventDefault();

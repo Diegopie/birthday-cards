@@ -2,6 +2,8 @@ const siteURL = window.location.origin;
 let currentClass = "note-fest"
 const isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
 
+console.log(document.body.scrollHeight);
+console.log(window.innerHeight);
 console.log(window.location.pathname.split("",1));
 // I keep getting bad request response but the data comes threw in the error???
 $.ajax({
@@ -47,27 +49,35 @@ $.ajax({
                 `
                 $('#card-contain').prepend(newNote)
             }
-            // * With All Cards Appended, Change CSS Var for Flowers to Fall Through Entire Page
-
-            const scrollHt = document.body.scrollHeight;
-            const viewHt = window.innerHeight;
-            if (isMobile) {
-                if (viewHt > scrollHt) {
-                    document.body.style.setProperty('--flower-height', (viewHt) + 'px');
-                } else {
-                    document.body.style.setProperty('--flower-height', (scrollHt) + 'px');
-                }
-              } else {
-                if (viewHt > scrollHt) {
-                    document.body.style.setProperty('--flower-height', (viewHt - 28) + 'px');
-                } else {
-                    document.body.style.setProperty('--flower-height', (scrollHt - 28) + 'px');
-                }
-              }
+            
 
            
             
         });
+
+        // * With All Cards Appended, Change CSS Var for Flowers to Fall Through Entire Page
+
+        
+
+        const scrollHt = document.body.scrollHeight;
+        const viewHt = window.innerHeight;
+        console.log(scrollHt);
+        console.log(viewHt);
+        if (isMobile) {
+            if (viewHt > scrollHt) {
+                document.body.style.setProperty('--flower-height', (viewHt) + 'px');
+            } else {
+                document.body.style.setProperty('--flower-height', (scrollHt) + 'px');
+            }
+          } else {
+            if (viewHt > scrollHt) {
+                document.body.style.setProperty('--flower-height', (viewHt - 28) + 'px');
+            } else {
+                document.body.style.setProperty('--flower-height', (scrollHt - 28) + 'px');
+            }
+          }
+
+          
         // ** Modal
         const solid = '-solid'
         $(".img").click((e) => {
