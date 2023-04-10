@@ -3,7 +3,7 @@ const apiRoutes = require('./routes/api-routes')
 require('./config/db')();
 
 const app = express();
-const PORT = process.env.PORT || 4090;
+const PORT = process.env.PORT || 4091;
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
