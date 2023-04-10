@@ -1,10 +1,11 @@
-const siteURL = window.location.origin;
+const siteURL = window.location.pathname;
 let currentClass = "note-fest"
 const isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
 
 // I keep getting bad request response but the data comes threw in the error???
 $.ajax({
     url: '/api/boo-note/all',
+    headers: {'year': siteURL},
     type: "GET",
     dataType: "json",
     success: (data) => {
@@ -59,24 +60,16 @@ $.ajax({
             { flowerName: '--flower-6-speed', flowerSpeed: 4.5, },
         ]
 
-
-
         const viewHt = window.innerHeight;
         const scrollHt = document.body.scrollHeight;
         const calc = scrollHt / viewHt;
-        console.log(calc);
 
         const setFlowerSpeed = (calc) => {
             flowerPetals.forEach((petal, index) => {
-                // const targetPetal = i + 1;
-                console.log(petal.flowerName);
-                console.log(petal.flowerSpeed);
                 petal.flowerSpeed = petal.flowerSpeed * calc
                 document.body.style.setProperty(petal.flowerName, `${petal.flowerSpeed}s`);
 
             });
-            console.log(flowerPetals);
-
         }
 
 

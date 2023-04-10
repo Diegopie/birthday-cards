@@ -1,5 +1,5 @@
 const noteRouter = require('express').Router();
-const { BooNote24 } = require('../../models');
+const { BooNote24, BooNote23 } = require('../../models');
 
 // * Print Errors and Create Response Object 
 const handleError = (message, route, err, msgError) => {
@@ -13,6 +13,32 @@ const handleError = (message, route, err, msgError) => {
     };
 };
 
+// ** Get All Notes
+noteRouter.get('/all', ({ headers }, res) => {
+    let modal;
+
+    switch (headers.year) {
+        case '/':
+            modal = BooNote24;
+            break;
+        case '/23':
+            modal = BooNote23;
+            break;
+        default:
+            modal = BooNote24;
+            break;
+    }
+
+    modal.find({}, (err, notes) => {
+        if (err) res.status(500).json(
+            handleError('Error Has Occurred in Database Search', '/api/boo-note/all', err, true)
+        );
+
+        if (notes) res.status(400).json(
+            { notes }
+        )
+    });
+});
 
 // * Create New Note
 noteRouter.post('/new', (req, res) => {
@@ -30,26 +56,13 @@ noteRouter.post('/new', (req, res) => {
 });
 
 // ** Get All Notes
-noteRouter.get('/all', (req, res) => {
-    BooNote24.find({}, (err, notes) => {
-        if (err) res.status(500).json(
-            handleError('Error Has Occurred in Database Search', '/api/boo-note/all', err, true)
-        );
-        
-        if (notes) res.status(400).json(
-            { notes }
-        )
-    });
-});
-
-// ** Get All Notes
 noteRouter.put('/edit', (req, res) => {
     // console.log(req.body);
-    const {id, note, signature } = req.body;
+    const { id, note, signature } = req.body;
     // console.log({id, note, signature });
-     BooNote24.findByIdAndUpdate(
+    BooNote24.findByIdAndUpdate(
         { _id: id },
-        { $set: { note: note, signature: signature}},
+        { $set: { note: note, signature: signature } },
         { new: true },
         (err, note) => {
             if (err) res.status(500).json(
