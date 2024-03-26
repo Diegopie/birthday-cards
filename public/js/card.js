@@ -5,7 +5,7 @@ const isMobile = window.matchMedia("only screen and (max-width: 760px)").matches
 // I keep getting bad request response but the data comes threw in the error???
 $.ajax({
     url: '/api/boo-note/all',
-    headers: {'year': siteURL},
+    headers: { 'year': siteURL },
     type: "GET",
     dataType: "json",
     success: (data) => {
@@ -15,17 +15,17 @@ $.ajax({
         console.log(error);
         // console.log(error.responseJSON.notes);
         const noteData = error.responseJSON.notes
-        console.log(noteData);
         // ** Render Each Note
         noteData.forEach(note => {
             // console.log(note.note.length);
             if (note.note.length > 150) {
+                const noteMessage = note.photos.length > 0 ? 'Click Icon For Full Note and Photos!' : 'Click Icon For Full Note!';
                 const newNoteLong = `
                     <article 
-                        class="col-8 col-md-4 col-lg-2 note-card ${note.style[0]} parseText" data-id="${note._id}" data-text="${note.note}" data-local-id="${note.localID}"
+                        class="col-8 col-md-4 col-lg-2 note-card ${note.style[0]} parseText" data-id="${note._id}" data-text="${note.note}" data-photos="${note.photos} data-local-id="${note.localID}"
                     >
                         <h2 class="note">${note.note.substring(0, 110)} —</h2>
-                        <h6> Click Photo For Full Note </h6>
+                        <h6>${noteMessage}</h6>
                         <h4 class="signature"> ${note.signature}</h4>
                         <img 
                             class="img" src="/img/card/${note.style[1]}"
@@ -34,11 +34,13 @@ $.ajax({
                 `
                 $('#card-contain').prepend(newNoteLong)
             } else {
+                const noteMessage = note.photos.length > 0 ? 'Click Icon For Photos!' : '';
                 const newNote = `
                     <article 
-                        class="col-8 col-md-4 col-lg-2 note-card ${note.style[0]} parseText" data-id="${note._id}" data-text="${note.note}" data-local-id="${note.localID}"
+                        class="col-8 col-md-4 col-lg-2 note-card ${note.style[0]} parseText" data-id="${note._id}" data-text="${note.note}" data-photos="${note.photos}" data-local-id="${note.localID}"
                     >
                         <h2 class="note">${note.note} </h2>
+                        <h6>${noteMessage}</h6>
                         <h4 class="signature"> ${note.signature}</h4>
                         <img 
                             class="img" src="/img/card/${note.style[1]}"
@@ -101,6 +103,7 @@ $.ajax({
         const solid = '-solid'
         $(".img").click((e) => {
             e.preventDefault();
+            $("#photos-target").empty()
             // *** Update Styling
             const curStyle = e.target.parentElement.classList[4];
             const modalStyle = curStyle + solid;
@@ -119,7 +122,14 @@ $.ajax({
             // *** Update Image
             const img = e.target.attributes[1].value;
             // console.log(img);
-            $('#img-target').attr('src', img);
+            const photos = $(e.target.parentElement).data('photos').split(",");
+            if (photos[0] !== '') {
+                photos.forEach((photo) => {
+                    const img = `<img src=${photo} class=modal-photo />`;
+                    $('#photos-target').append(img)
+                })
+                $('#img-target').attr('src', img);
+            }
             $("#validateModal").modal();
         });
     }

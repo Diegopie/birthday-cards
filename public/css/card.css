@@ -30,7 +30,6 @@ a {
 .flex-col {
     display: flex;
     flex-direction: column;
-    align-items: baseline;
 }
 
 .button {
@@ -81,11 +80,11 @@ a:hover {
     height: 180px;
     font-size: 36px;
 }
+  
 
-.note-photo {
-    
-}
-
+input[type="file"] {
+    display: none;
+  }
 /* Note Settings */
 .note-settings {
     color: white;
@@ -150,6 +149,7 @@ a:hover {
     margin: 25px 10px;
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
     border-radius: 8px;
     font: 3vmin/1.0 Serif;
 }
@@ -187,6 +187,18 @@ a:hover {
     /* flex-wrap: wrap; */
     border-radius: 8px;
     font: 3vmin/1.0 Serif;
+}
+
+#photos-target {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.modal-photo {
+    object-fit: cover;
+    height: 200px;
+    width: 100%;
 }
 
 /*  ** User Selections */

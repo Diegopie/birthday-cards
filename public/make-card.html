@@ -59,8 +59,8 @@
                     <h2>Text Color</h2>
                     <p id="draftMsg"></p>
                 </div>
-                <textarea class="note text-height" placeholder="Write your note here!"></textarea>
-                <textarea class="signature" placeholder="Write your name here!"></textarea>
+                <textarea id="MakeNoteText" class="note text-height" placeholder="Write your note here!"></textarea>
+                <textarea id="MakeCardSignature" class="signature" placeholder="Write your name here!"></textarea>
                 <img class="img" src="/img/card/fall-01.png">
             </article>
             <article class="col-4 note-card note-settings note-photo">
@@ -70,8 +70,8 @@
                 </div>
                 <p class="text-sm">Most photos are heic files, which just means they are a pain to work with. Take a screenshot of the photo then you can upload it! (I'll work on supporting heic at some point 🫠)</p>
                 <div class="flex-col">
-                    <label class="text-sm" for="photoUpload">Select Photo(s)</label>
-                    <input type="file" id="photoUpload" accept=".png, .jpg" multiple/>
+                    <label class="text-sm button custom-file-upload" for="photoUpload">Select Photo(s)</label>
+                    <input type="file" id="photoUpload" class="" accept=".png, .jpg" multiple/>
                 </div>
                 <p id="photoValidate"></p>
             </article>

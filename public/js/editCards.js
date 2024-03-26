@@ -26,7 +26,7 @@ $.ajax({
                         <img 
                             class="imgEdit" src="/img/card/${note.style[1]}"
                         >
-                        <div class="center" style="padding-left: 22%;">
+                        <div class="center">
                             <a class="EditButton center" id="submit-update"> Update</a>
                         </div>
                     </article>

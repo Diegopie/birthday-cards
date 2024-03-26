@@ -8,7 +8,7 @@ let currentClass = "note-fall"
 let dbStyle = ["note-fall", "fall-01.png"]
 const imgPath = "/img/card/";
 const dbID = checkLocalID();
-const dbURLs = [];
+let dbURLs = [];
 
 
 // * Update TextBox Size
@@ -19,6 +19,14 @@ function createUUID() {
         return v.toString(16);
     });
 }
+
+function createSmolUUID() {
+    return 'xxxxxx'.replace(/x/g, function (c) {
+        var r = Math.random() * 16 | 0;
+        return r.toString(16);
+    });
+}
+
 
 const setLocal = () => {
     localStorage.setItem(
@@ -134,7 +142,6 @@ $('#submit').click(async e => {
         });
         const noteResponse = await noteRequest.json();
         // *** POST Error
-        console.log(noteResponse.message.msgError);
         if (noteResponse.message.msgError) {
             $('.note-msg').text("Your Note Couldn't Be Sent! Refresh and Try Again 😐");
             $('.note-msg').removeClass('poof');
@@ -146,6 +153,7 @@ $('#submit').click(async e => {
             const redirect = `<a class="col button" href="/"> Click To View Your Card!</a>`
             $('.note-msg').append(redirect);
             localStorage.removeItem('noteDraft');
+            localStorage.removeItem('photos');
         }
     }
 });
@@ -154,20 +162,22 @@ $('#submit').click(async e => {
 // * Check Local Storage for a Draft
 function checkLocal() {
     const noteDraft = JSON.parse(localStorage.getItem('noteDraft'));
-    // console.log(noteDraft);
+    const photos = JSON.parse(localStorage.getItem('photos'));
+    if (photos !== null) {
+        dbURLs = photos;
+        $('#photoValidate').text('Found Previously Added Photos!');
+    }
     if (noteDraft === null) {
         return;
     }
     // Place Local Text in textarea 
-    $('.note').val(noteDraft.note);
-    $('.signature').val(noteDraft.signature);
-    console.log(noteDraft.style);
+    $('#MakeNoteText').val(noteDraft.note);
+    $('#MakeCardSignature').val(noteDraft.signature);
     switch (noteDraft.style) {
         case 'note-fall':
             setFall();
             break;
         case 'note-succulents':
-            console.log('hits');
             setSucculent();
             break;
         case 'note-dreamBuilder':
@@ -187,7 +197,6 @@ function checkLocalID() {
     const localID = localStorage.getItem('id');
     if (localID === null) {
         const newID = createUUID()
-        console.log(newID);
         localStorage.setItem('id', newID);
         return newID;
     }
@@ -205,25 +214,24 @@ $('textarea').each(function () {
 
 $('#photoUpload').on('change', async (e) => {
     const photos = e.target.files;
-    console.log(photos);
 
     $('#photoValidate').text('Adding...')
-    
+
     for (let photosIndex = 0; photosIndex < photos.length; photosIndex++) {
         const photo = photos[photosIndex];
 
-        const photoRef = ref(storage, `25/${photo.name}_${createUUID()}`);
+        const photoRef = ref(storage, `25/${photo.name}_${createSmolUUID()}`);
 
         try {
             const photoSnapshot = await uploadBytes(photoRef, photo);
             const url = await getDownloadURL(photoRef);
             dbURLs.push(url);
-            
+
         } catch (error) {
             console.log(error);
             $('#photoValidate').text('Something went wrong! Refresh and try again')
         }
     }
-    $('#photoValidate').text('Photo(s) Added!')
-    console.log(dbURLs);
+    $('#photoValidate').text('Photo(s) Added!');
+    localStorage.setItem('photos', JSON.stringify(dbURLs));
 })
