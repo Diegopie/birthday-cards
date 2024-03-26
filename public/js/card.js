@@ -128,8 +128,8 @@ $.ajax({
                     const img = `<img src=${photo} class=modal-photo />`;
                     $('#photos-target').append(img)
                 })
-                $('#img-target').attr('src', img);
             }
+            $('#img-target').attr('src', img);
             $("#validateModal").modal();
         });
     }
