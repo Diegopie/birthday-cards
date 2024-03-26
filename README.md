@@ -7,3 +7,5 @@ Card Ideas
 - Diamonds
 
 To Do
+
+** add photos to local

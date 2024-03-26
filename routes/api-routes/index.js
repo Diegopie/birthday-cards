@@ -1,9 +1,7 @@
 const router = require('express').Router();
-const booNote24 = require('./booNote.routes');
-const past = require('./past.routes');
+const noteRouter = require('./booNote.routes');
 
-router.use('/api/boo-note', booNote24);
-router.use('/api/past', past);
+router.use('/api/boo-note', noteRouter);
 
 
 module.exports = router;

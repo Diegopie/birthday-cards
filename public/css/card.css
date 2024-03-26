@@ -3,7 +3,7 @@ body {
     /* padding: 10px 20px;
     margin: 10px 20px; */
     color: white;
-    background-color: #9ded72;
+    background-color: #76b454;
 }
 
 main {
@@ -18,9 +18,19 @@ a {
     color: inherit;
 }
 
+.text-sm {
+    font-size: 1.25rem;
+}
+
 .row {
     margin-left: 0px;
     margin-right: 0px;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
 }
 
 .button {
@@ -72,9 +82,13 @@ a:hover {
     font-size: 36px;
 }
 
+.note-photo {
+    
+}
+
 /* Note Settings */
 .note-settings {
-    color: black;
+    color: white;
     background-color: rgba(154, 197, 88, 0.8);
     padding: 10px 38px 20px 38px;
     border-radius: 8px;

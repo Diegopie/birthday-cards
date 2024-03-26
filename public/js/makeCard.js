@@ -1,9 +1,14 @@
+import { getDownloadURL, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-storage.js";
+
+import { storage } from '/js/firebase.js';
+
 // * Stores Current Class Being Rendered to Correctly Target and Replace Styles
 let currentClass = "note-fall"
 //fall Default Styling to Send to DB, Listeners Will Update this Value
 let dbStyle = ["note-fall", "fall-01.png"]
 const imgPath = "/img/card/";
 const dbID = checkLocalID();
+const dbURLs = [];
 
 
 // * Update TextBox Size
@@ -122,6 +127,7 @@ $('#submit').click(async e => {
                 note: userNote,
                 signature: userSignature,
                 style: dbStyle,
+                photos: dbURLs,
                 localID: dbID
             }),
             method: 'POST'
@@ -179,7 +185,6 @@ checkLocal();
 // Check Local For UUID
 function checkLocalID() {
     const localID = localStorage.getItem('id');
-    console.log(localID);
     if (localID === null) {
         const newID = createUUID()
         console.log(newID);
@@ -198,3 +203,27 @@ $('textarea').each(function () {
     setLocal();
 });
 
+$('#photoUpload').on('change', async (e) => {
+    const photos = e.target.files;
+    console.log(photos);
+
+    $('#photoValidate').text('Adding...')
+    
+    for (let photosIndex = 0; photosIndex < photos.length; photosIndex++) {
+        const photo = photos[photosIndex];
+
+        const photoRef = ref(storage, `25/${photo.name}_${createUUID()}`);
+
+        try {
+            const photoSnapshot = await uploadBytes(photoRef, photo);
+            const url = await getDownloadURL(photoRef);
+            dbURLs.push(url);
+            
+        } catch (error) {
+            console.log(error);
+            $('#photoValidate').text('Something went wrong! Refresh and try again')
+        }
+    }
+    $('#photoValidate').text('Photo(s) Added!')
+    console.log(dbURLs);
+})
