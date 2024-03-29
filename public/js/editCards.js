@@ -12,7 +12,7 @@ $.ajax({
         console.log(error);
         // console.log(error.responseJSON.notes);
         const noteData = error.responseJSON.notes
-        console.log(noteData);
+        // console.log(noteData);
         // ** Render Each Note
         noteData.forEach(note => {
             if (storageID !== note.localID) return;
