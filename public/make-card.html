@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/card.css">
+    <link rel="stylesheet" href="/css/make-card.css">
     <title>Write Parker a Card!</title>
 </head>
 
@@ -69,10 +70,12 @@
                     <p>(optional)</p>
                     <p class="text-sm ">Share your memories together!</p>
                 </div>
-                <p class="text-sm">If you don't see the photo you want to share it is likely a hiec file, which just means they are a pain to work with 😅. Take a screenshot of the photo then you can upload it! (I'll work on supporting heic at some point 🫠)</p>
+                <p class="text-sm">If you don't see the photo you want to share it is likely a hiec file, which just
+                    means they are a pain to work with 😅. Take a screenshot of the photo then you can upload it! (I'll
+                    work on supporting heic at some point 🫠)</p>
                 <div class="flex-col">
                     <label class="text-sm button custom-file-upload" for="photoUpload">Select Photo(s)</label>
-                    <input type="file" id="photoUpload" class="" accept=".png, .jpg" multiple/>
+                    <input type="file" id="photoUpload" class="" accept=".png, .jpg" multiple />
                 </div>
                 <p id="photoValidate"></p>
             </article>
@@ -86,6 +89,20 @@
                     <button class="button" id="earthyFriends"> Earthy Friends </button>
                 </div>
             </article>
+        </section>
+        <section id="show-uploaded-photos">
+            
+            <!-- 
+            <div>
+                <img src="/img/about/about-diego-01.jpg" />
+                <button>X</button>
+            </div>
+            <div>
+                <img src="/img/about/about-diego-02.jpg" />
+                <button>X</button>
+            </div>
+            -->
+            
         </section>
         <section class="row makeCard-submit">
             <button class="button" id="submit" href=""> Send Card! </button>

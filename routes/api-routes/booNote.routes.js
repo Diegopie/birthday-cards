@@ -1,7 +1,7 @@
 const noteRouter = require('express').Router();
-const { BooNote25, BooNote24, BooNote23 } = require('../../models');
+const { BooNotes, BooNote25, BooNote24, BooNote23 } = require('../../models');
 
-const CurrentBday = BooNote25;
+const CurrentBday = BooNotes;
 
 // * Print Errors and Create Response Object 
 const handleError = (message, route, err, msgError) => {
@@ -15,7 +15,7 @@ const handleError = (message, route, err, msgError) => {
     };
 };
 
-// ** Get All Notes
+// ** Get All Notes (BooNotes will store all notes moving forward)
 noteRouter.get('/all', ({ headers }, res) => {
     let Modal;
 
@@ -28,6 +28,9 @@ noteRouter.get('/all', ({ headers }, res) => {
             break;
         case '/24':
             Modal = BooNote24;
+            break;
+        case '/25':
+            Modal = BooNote25;
             break;
         default:
             Modal = CurrentBday;

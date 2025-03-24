@@ -18,11 +18,14 @@ $.ajax({
         // ** Render Each Note
         noteData.forEach(note => {
             // console.log(note.note.length);
+            const photoURLS = note.photos.map(data => data.url)
+            console.log(note.photos)
+            console.log(photoURLS)
             if (note.note.length > 150) {
                 const noteMessage = note.photos.length > 0 ? 'Click Icon For Full Note and Photos!' : 'Click Icon For Full Note!';
                 const newNoteLong = `
                     <article 
-                        class="col-8 col-md-4 col-lg-2 note-card ${note.style[0]} parseText" data-id="${note._id}" data-text="${note.note}" data-photos="${note.photos} data-local-id="${note.localID}"
+                        class="col-8 col-md-4 col-lg-2 note-card ${note.style[0]} parseText" data-id="${note._id}" data-text="${note.note}" data-photos="${photoURLS}" data-local-id="${note.localID}"
                     >
                         <h2 class="note">${note.note.substring(0, 110)} —</h2>
                         <h6>${noteMessage}</h6>
@@ -35,9 +38,10 @@ $.ajax({
                 $('#card-contain').prepend(newNoteLong)
             } else {
                 const noteMessage = note.photos.length > 0 ? 'Click Icon For Photos!' : '';
+                const photoURLS = note.photos.map(data => data.url)
                 const newNote = `
                     <article 
-                        class="col-8 col-md-4 col-lg-2 note-card ${note.style[0]} parseText" data-id="${note._id}" data-text="${note.note}" data-photos="${note.photos}" data-local-id="${note.localID}"
+                        class="col-8 col-md-4 col-lg-2 note-card ${note.style[0]} parseText" data-id="${note._id}" data-text="${note.note}" data-photos="${photoURLS}" data-local-id="${note.localID}"
                     >
                         <h2 class="note">${note.note} </h2>
                         <h6>${noteMessage}</h6>

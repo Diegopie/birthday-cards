@@ -1,4 +1,4 @@
-import { getDownloadURL, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-storage.js";
+import { getDownloadURL, ref, uploadBytes, deleteObject } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-storage.js";
 
 import { storage } from '/js/firebase.js';
 
@@ -9,7 +9,7 @@ let dbStyle = ["note-fall", "fall-01.png"]
 const imgPath = "/img/card/";
 const dbID = checkLocalID();
 let dbURLs = [];
-
+const currentBirthday = 26
 
 // * Update TextBox Size
 
@@ -133,6 +133,7 @@ $('#submit').click(async e => {
             },
             body: JSON.stringify({
                 note: userNote,
+                bday: currentBirthday,
                 signature: userSignature,
                 style: dbStyle,
                 photos: dbURLs,
@@ -158,6 +159,56 @@ $('#submit').click(async e => {
     }
 });
 
+// * Delete Photos
+async function deletePhoto(path, photoWrapper) {
+    const photoRef = ref(storage, path);
+
+    try {
+        await deleteObject(photoRef);          // Delete from Firebase
+        photoWrapper.remove();                 // Remove from DOM
+
+        // Remove from dbURLs array
+        const index = dbURLs.findIndex(photo => photo.path === path);
+        if (index > -1) dbURLs.splice(index, 1);
+        localStorage.setItem('photos', JSON.stringify(dbURLs));
+        console.log(`Photo deleted: ${path}`);
+    } catch (error) {
+        console.error("Error deleting photo:", error);
+        alert("Failed to delete photo. Please try again.");
+    }
+}
+
+
+// * Build Uploaded Photos
+function buildPhotos(newUpload) {
+    
+    if (newUpload) {
+        const newPhoto = `
+            <div class="photo-wrapper">
+                <img src="${newUpload.url}" />
+                <button class="delete-btn" data-path="${newUpload.path}">X</button>
+            </div>
+        `;
+        $('#show-uploaded-photos').append(newPhoto);
+        return;
+    }
+
+    dbURLs.forEach(({url, path}) => {
+        const newPhoto = `
+            <div class="photo-wrapper">
+                <img src="${url}" />
+                <button class="delete-btn" data-path="${path}">X</button>
+            </div>
+        `;
+        $('#show-uploaded-photos').append(newPhoto);
+    })
+
+    $('.delete-btn').off('click').on('click', function () {
+        const path = $(this).data('path');
+        const photoWrapper = $(this).closest('.photo-wrapper');
+        deletePhoto(path, photoWrapper);
+    });
+}
 
 // * Check Local Storage for a Draft
 function checkLocal() {
@@ -166,6 +217,7 @@ function checkLocal() {
     if (photos !== null) {
         dbURLs = photos;
         $('#photoValidate').text('Found Previously Added Photos!');
+        buildPhotos();
     }
     if (noteDraft === null) {
         return;
@@ -196,7 +248,7 @@ checkLocal();
 function checkLocalID() {
     const localID = localStorage.getItem('id');
     if (localID === null) {
-        const newID = createUUID()
+        const newID = createSmolUUID()
         localStorage.setItem('id', newID);
         return newID;
     }
@@ -220,12 +272,14 @@ $('#photoUpload').on('change', async (e) => {
     for (let photosIndex = 0; photosIndex < photos.length; photosIndex++) {
         const photo = photos[photosIndex];
 
-        const photoRef = ref(storage, `25/${photo.name}_${createSmolUUID()}`);
+        const path = `${currentBirthday}/${dbID}_${createSmolUUID()}_${photo.name}`;
+        const photoRef = ref(storage, path);
 
         try {
             const photoSnapshot = await uploadBytes(photoRef, photo);
             const url = await getDownloadURL(photoRef);
-            dbURLs.push(url);
+            dbURLs.push({ url, path });
+            buildPhotos({ url, path })
 
         } catch (error) {
             console.log(error);
@@ -233,5 +287,8 @@ $('#photoUpload').on('change', async (e) => {
         }
     }
     $('#photoValidate').text('Photo(s) Added!');
+    setTimeout(() => {
+        $('#photoValidate').text('')
+    }, 2500)
     localStorage.setItem('photos', JSON.stringify(dbURLs));
 })
