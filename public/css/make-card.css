@@ -15,18 +15,22 @@
   /* Ensure images maintain aspect ratio and cover their container */
   img {
     width: 100%;
-    max-height: 22rem;  /* Keeps the natural height */
-    object-fit: contain; /* Ensures full image is visible */
-    aspect-ratio: auto;  /* Retains original aspect ratio */
+    max-height: 22rem;
+    /* Keeps the natural height */
+    object-fit: contain;
+    /* Ensures full image is visible */
+    aspect-ratio: auto;
+    /* Retains original aspect ratio */
     border-radius: 8px;
-    background-color: #5b8d41; /* Placeholder for empty space */
+    background-color: #5b8d41;
+    /* Placeholder for empty space */
     transition: transform 0.3s ease-in-out;
 
     &:hover {
       transform: scale(1.05);
     }
   }
- 
+
 
   button {
     position: absolute;
@@ -35,4 +39,13 @@
     border-radius: 4px;
     background-color: rgba(255, 255, 255, 0.8);
   }
+}
+
+#user-card-contain {
+  text-align: center;
+  display: flex;
+  gap: 2rem;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
 }

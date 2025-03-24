@@ -181,7 +181,7 @@ async function deletePhoto(path, photoWrapper) {
 
 // * Build Uploaded Photos
 function buildPhotos(newUpload) {
-    
+
     if (newUpload) {
         const newPhoto = `
             <div class="photo-wrapper">
@@ -190,18 +190,19 @@ function buildPhotos(newUpload) {
             </div>
         `;
         $('#show-uploaded-photos').append(newPhoto);
-        return;
+    } else {
+        dbURLs.forEach(({ url, path }) => {
+            const newPhoto = `
+                <div class="photo-wrapper">
+                    <img src="${url}" />
+                    <button class="delete-btn" data-path="${path}">X</button>
+                </div>
+            `;
+            $('#show-uploaded-photos').append(newPhoto);
+        })
     }
 
-    dbURLs.forEach(({url, path}) => {
-        const newPhoto = `
-            <div class="photo-wrapper">
-                <img src="${url}" />
-                <button class="delete-btn" data-path="${path}">X</button>
-            </div>
-        `;
-        $('#show-uploaded-photos').append(newPhoto);
-    })
+
 
     $('.delete-btn').off('click').on('click', function () {
         const path = $(this).data('path');
@@ -257,10 +258,12 @@ function checkLocalID() {
 
 
 $('textarea').each(function () {
-    this.setAttribute('style', 'min-height: ' + (this.scrollHeight) + "px; overflow-y: hidden;")
+    console.log(this.scrollHeight)
+    const containerHeight = this.scrollHeight > 2600 ? 2600 : this.scrollHeight;
+    this.setAttribute('style', 'height: ' + (containerHeight) + "px;")
 }).on('input', function () {
-    this.style.height = 'auto';
-    this.style.height = (this.scrollHeight) + 'px';
+    const containerHeight = this.scrollHeight > 2600 ? 2600 : this.scrollHeight;
+    this.style.height = (containerHeight) + 'px';
     setLocal();
 });
 
