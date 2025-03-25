@@ -164,13 +164,17 @@ async function deletePhoto(path, photoWrapper) {
     const photoRef = ref(storage, path);
 
     try {
-        await deleteObject(photoRef);          // Delete from Firebase
-        photoWrapper.remove();                 // Remove from DOM
+        await deleteObject(photoRef);
+        photoWrapper.remove();
 
         // Remove from dbURLs array
         const index = dbURLs.findIndex(photo => photo.path === path);
         if (index > -1) dbURLs.splice(index, 1);
-        localStorage.setItem('photos', JSON.stringify(dbURLs));
+        if (dbURLs.length === 0) {
+            localStorage.removeItem('photos')
+        } else {
+            localStorage.setItem('photos', JSON.stringify(dbURLs));
+        }
         console.log(`Photo deleted: ${path}`);
     } catch (error) {
         console.error("Error deleting photo:", error);
