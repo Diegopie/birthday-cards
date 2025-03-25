@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const BooNoteSchema = new mongoose.Schema({
+const BooNote25Schema = new mongoose.Schema({
     note: {
         type: String,
         required: true
@@ -16,9 +16,13 @@ const BooNoteSchema = new mongoose.Schema({
     localID: {
         type: String,
         required: true,
+    },
+    photos: {
+        type: Array,
+        required: false,
     }
 });
 
-const BooNote = mongoose.model('Boo-Note', BooNoteSchema);
+const BooNote25 = mongoose.model('Boo-Note-25', BooNote25Schema);
 
-module.exports = BooNote;
+module.exports = BooNote25;

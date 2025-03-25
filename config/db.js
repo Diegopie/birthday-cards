@@ -2,11 +2,10 @@ const mongoose = require('mongoose');
 
 async function db() {
     try {
-        mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/boothang-bday', {
+        mongoose.set("strictQuery", false);
+        mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1/boothang-bday-23', {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            useFindAndModify: false,
-            useCreateIndex: true
         });
         console.log('Successfully Connected To DB');
     } catch (error) {

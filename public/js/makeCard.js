@@ -1,10 +1,15 @@
+import { getDownloadURL, ref, uploadBytes, deleteObject } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-storage.js";
+
+import { storage } from '/js/firebase.js';
+
 // * Stores Current Class Being Rendered to Correctly Target and Replace Styles
 let currentClass = "note-fall"
 //fall Default Styling to Send to DB, Listeners Will Update this Value
 let dbStyle = ["note-fall", "fall-01.png"]
 const imgPath = "/img/card/";
 const dbID = checkLocalID();
-
+let dbURLs = [];
+const currentBirthday = 26
 
 // * Update TextBox Size
 
@@ -14,6 +19,14 @@ function createUUID() {
         return v.toString(16);
     });
 }
+
+function createSmolUUID() {
+    return 'xxxxxx'.replace(/x/g, function (c) {
+        var r = Math.random() * 16 | 0;
+        return r.toString(16);
+    });
+}
+
 
 const setLocal = () => {
     localStorage.setItem(
@@ -69,7 +82,7 @@ const setDreamBuilder = (e) => {
 }
 $('#dreamBuilder').click(setDreamBuilder);
 
-// ** Age of Empire: Remove Current Styling and Apply Age of Empire Class and Image
+// ** FieryAries: Remove Current Styling and Apply FieryAries Class and Image
 const setFieryAries = (e) => {
     // e.preventDefault();
     // Change Color
@@ -82,6 +95,20 @@ const setFieryAries = (e) => {
     setLocal();
 }
 $('#fieryAries').click(setFieryAries);
+
+// ** FieryAries: Remove Current Styling and Apply FieryAries Class and Image
+const setEarthyFriends = (e) => {
+    // e.preventDefault();
+    // Change Color
+    $('#change').removeClass(currentClass);
+    $('#change').addClass("note-earthyFriends");
+    currentClass = "note-earthyFriends";
+    // Change Image
+    $('.img').attr('src', imgPath + 'earthyFriends-01.png');
+    dbStyle = ["note-earthyFriends", "earthyFriends-01.png"];
+    setLocal();
+}
+$('#earthyFriends').click(setEarthyFriends);
 
 // * Submit Listener: Validate textareas; Make POST Req; Handle Success and Fail
 $('#submit').click(async e => {
@@ -106,15 +133,16 @@ $('#submit').click(async e => {
             },
             body: JSON.stringify({
                 note: userNote,
+                bday: currentBirthday,
                 signature: userSignature,
                 style: dbStyle,
+                photos: dbURLs,
                 localID: dbID
             }),
             method: 'POST'
         });
         const noteResponse = await noteRequest.json();
         // *** POST Error
-        console.log(noteResponse.message.msgError);
         if (noteResponse.message.msgError) {
             $('.note-msg').text("Your Note Couldn't Be Sent! Refresh and Try Again 😐");
             $('.note-msg').removeClass('poof');
@@ -126,28 +154,83 @@ $('#submit').click(async e => {
             const redirect = `<a class="col button" href="/"> Click To View Your Card!</a>`
             $('.note-msg').append(redirect);
             localStorage.removeItem('noteDraft');
+            localStorage.removeItem('photos');
         }
     }
 });
 
+// * Delete Photos
+async function deletePhoto(path, photoWrapper) {
+    const photoRef = ref(storage, path);
+
+    try {
+        await deleteObject(photoRef);          // Delete from Firebase
+        photoWrapper.remove();                 // Remove from DOM
+
+        // Remove from dbURLs array
+        const index = dbURLs.findIndex(photo => photo.path === path);
+        if (index > -1) dbURLs.splice(index, 1);
+        localStorage.setItem('photos', JSON.stringify(dbURLs));
+        console.log(`Photo deleted: ${path}`);
+    } catch (error) {
+        console.error("Error deleting photo:", error);
+        alert("Failed to delete photo. Please try again.");
+    }
+}
+
+
+// * Build Uploaded Photos
+function buildPhotos(newUpload) {
+
+    if (newUpload) {
+        const newPhoto = `
+            <div class="photo-wrapper">
+                <img src="${newUpload.url}" />
+                <button class="delete-btn" data-path="${newUpload.path}">X</button>
+            </div>
+        `;
+        $('#show-uploaded-photos').append(newPhoto);
+    } else {
+        dbURLs.forEach(({ url, path }) => {
+            const newPhoto = `
+                <div class="photo-wrapper">
+                    <img src="${url}" />
+                    <button class="delete-btn" data-path="${path}">X</button>
+                </div>
+            `;
+            $('#show-uploaded-photos').append(newPhoto);
+        })
+    }
+
+
+
+    $('.delete-btn').off('click').on('click', function () {
+        const path = $(this).data('path');
+        const photoWrapper = $(this).closest('.photo-wrapper');
+        deletePhoto(path, photoWrapper);
+    });
+}
 
 // * Check Local Storage for a Draft
 function checkLocal() {
     const noteDraft = JSON.parse(localStorage.getItem('noteDraft'));
-    // console.log(noteDraft);
+    const photos = JSON.parse(localStorage.getItem('photos'));
+    if (photos !== null) {
+        dbURLs = photos;
+        $('#photoValidate').text('Found Previously Added Photos!');
+        buildPhotos();
+    }
     if (noteDraft === null) {
         return;
     }
     // Place Local Text in textarea 
-    $('.note').val(noteDraft.note);
-    $('.signature').val(noteDraft.signature);
-    console.log(noteDraft.style);
+    $('#MakeNoteText').val(noteDraft.note);
+    $('#MakeCardSignature').val(noteDraft.signature);
     switch (noteDraft.style) {
         case 'note-fall':
             setFall();
             break;
         case 'note-succulents':
-            console.log('hits');
             setSucculent();
             break;
         case 'note-dreamBuilder':
@@ -165,10 +248,8 @@ checkLocal();
 // Check Local For UUID
 function checkLocalID() {
     const localID = localStorage.getItem('id');
-    console.log(localID);
     if (localID === null) {
-        const newID = createUUID()
-        console.log(newID);
+        const newID = createSmolUUID()
         localStorage.setItem('id', newID);
         return newID;
     }
@@ -176,11 +257,38 @@ function checkLocalID() {
 }
 
 
-$('textarea').each(function () {
-    this.setAttribute('style', 'min-height: ' + (this.scrollHeight) + "px; overflow-y: hidden;")
-}).on('input', function () {
-    this.style.height = 'auto';
-    this.style.height = (this.scrollHeight) + 'px';
+$('textarea').on('input', function () {
+    const containerHeight = this.scrollHeight > 900 ? 900 : this.scrollHeight;
+    console.log(containerHeight);
+    this.style.height = (containerHeight) + 'px';
     setLocal();
 });
 
+$('#photoUpload').on('change', async (e) => {
+    const photos = e.target.files;
+
+    $('#photoValidate').text('Adding...')
+
+    for (let photosIndex = 0; photosIndex < photos.length; photosIndex++) {
+        const photo = photos[photosIndex];
+
+        const path = `${currentBirthday}/${dbID}_${createSmolUUID()}_${photo.name}`;
+        const photoRef = ref(storage, path);
+
+        try {
+            const photoSnapshot = await uploadBytes(photoRef, photo);
+            const url = await getDownloadURL(photoRef);
+            dbURLs.push({ url, path });
+            buildPhotos({ url, path })
+
+        } catch (error) {
+            console.log(error);
+            $('#photoValidate').text('Something went wrong! Refresh and try again')
+        }
+    }
+    $('#photoValidate').text('Photo(s) Added!');
+    setTimeout(() => {
+        $('#photoValidate').text('')
+    }, 2500)
+    localStorage.setItem('photos', JSON.stringify(dbURLs));
+})

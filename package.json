@@ -6,14 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "watch:server": "nodemon server.js",
+    "dev": "nodemon server.js",
     "sass-convert": "sass --watch public/css/sass:public/css"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.13.14",
+    "mongoose": "^6.5.1",
     "sass": "^1.32.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }

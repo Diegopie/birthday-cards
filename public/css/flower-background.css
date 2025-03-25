@@ -5,6 +5,12 @@
 
 :root {
     --flower-height: 100vh;
+    --flower-1-speed: 7s;
+    --flower-2-speed: 4s;
+    --flower-3-speed: 10s;
+    --flower-4-speed: 4s;
+    --flower-5-speed: 10s;
+    --flower-5-speed: 4.5s;
 }
 
 .flower{
@@ -46,7 +52,7 @@
     position:absolute;
     left:8%;
     animation-name:rain;
-    animation-duration:7s;
+    animation-duration: var(--flower-1-speed);
     animation-iteration-count:infinite;
     animation-timing-function:linear;
 }
@@ -59,7 +65,7 @@
     position:absolute;
     left:25%;
     animation-name:rain;
-    animation-duration:4s;
+    animation-duration: var(--flower-2-speed);
     animation-iteration-count:infinite;
     animation-timing-function:linear;
     animation-delay:1.5s;
@@ -72,7 +78,7 @@
     position:absolute;
     left:42%;
     animation-name:rain;
-    animation-duration:10s;
+    animation-duration: var(--flower-3-speed);
     animation-iteration-count:infinite;
     animation-timing-function:linear;
     animation-delay:0s;
@@ -85,7 +91,7 @@
     position:absolute;
     left:59%;
     animation-name:rain;
-    animation-duration:4s;
+    animation-duration: var(--flower-4-speed);
     animation-iteration-count:infinite;
     animation-timing-function:linear;
     animation-delay:2.5s;
@@ -99,7 +105,7 @@
     position:absolute;
     left:75%;
     animation-name:rain;
-    animation-duration:10s;
+    animation-duration: var(--flower-5-speed);
     animation-iteration-count:infinite;
     animation-timing-function:linear;
     animation-delay:2.2s;
@@ -113,7 +119,7 @@
     position:absolute;
     left:90%;
     animation-name:rain;
-    animation-duration:4.5s;
+    animation-duration: var(--flower-6-speed);
     animation-iteration-count:infinite;
     animation-timing-function:ease-in;
     animation-delay:4.5s;
