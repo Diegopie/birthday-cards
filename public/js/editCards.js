@@ -58,7 +58,7 @@ $.ajax({
             if (storageID !== note.localID) return;
 
             const noteContainer = $('<div>');
-            noteContainer.attr('style', 'width: 620px')
+            noteContainer.attr('class', 'edit-note-container')
 
             const newNote = `
                 <article 

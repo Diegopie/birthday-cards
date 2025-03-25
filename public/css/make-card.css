@@ -2,7 +2,7 @@
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+  gap: 2rem;
   justify-content: center;
   align-items: center;
   padding: 0 3rem;
@@ -53,7 +53,7 @@
 
 
 .note-card-edit {
-  min-width: 600px;
+  min-width: 380px;
   min-height: 150px;
   /* height: 580px; */
   margin: 25px 10px;
@@ -62,15 +62,26 @@
   justify-content: center;
   border-radius: 8px;
   font: 3vmin/1.0 Serif;
+
+  @media screen and (min-width: 768px) {
+    min-width: 620px;
+  }
 }
 
+.edit-note-container {
+  width: 380px;
+  @media screen and (min-width: 768px) {
+    width: 620px;
+  }
+}
 
 
 .edit-photo-container {
 
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+  gap: 1.6rem;
   justify-content: center;
   align-items: center;
   padding: 0 3rem;
