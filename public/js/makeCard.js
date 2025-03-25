@@ -257,12 +257,9 @@ function checkLocalID() {
 }
 
 
-$('textarea').each(function () {
-    console.log(this.scrollHeight)
-    const containerHeight = this.scrollHeight > 2600 ? 2600 : this.scrollHeight;
-    this.setAttribute('style', 'height: ' + (containerHeight) + "px;")
-}).on('input', function () {
-    const containerHeight = this.scrollHeight > 2600 ? 2600 : this.scrollHeight;
+$('textarea').on('input', function () {
+    const containerHeight = this.scrollHeight > 900 ? 900 : this.scrollHeight;
+    console.log(containerHeight);
     this.style.height = (containerHeight) + 'px';
     setLocal();
 });

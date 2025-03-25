@@ -19,7 +19,7 @@ $.ajax({
 
             const newNote = `
                     <article 
-                        class="col-8 col-md-4 col-lg-2 note-card ${note.style[0]} parseText note-preview" data-id="${note._id}" data-text="${note.note}" data-localID="${note.localID}"
+                        class="col-8 col-md-4 col-lg-2 note-card-edit ${note.style[0]} parseText note-preview" data-id="${note._id}" data-text="${note.note}" data-localID="${note.localID}"
                     >
                         <textarea class="note text-height">${note.note} </textarea>
                         <textarea class="signature">${note.signature}</textarea>

@@ -49,3 +49,16 @@
   justify-content: center;
   align-items: center;
 }
+
+
+.note-card-edit {
+  min-width: 600px;
+  min-height: 150px;
+  /* height: 580px; */
+  margin: 25px 10px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  border-radius: 8px;
+  font: 3vmin/1.0 Serif;
+}
