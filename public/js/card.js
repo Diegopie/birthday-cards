@@ -9,18 +9,16 @@ $.ajax({
     type: "GET",
     dataType: "json",
     success: (data) => {
-        console.log(data.responseJSON.notes);
+        // console.log(data.responseJSON.notes);
     },
     error: (error) => {
-        console.log(error);
+        // console.log(error);
         // console.log(error.responseJSON.notes);
         const noteData = error.responseJSON.notes
         // ** Render Each Note
         noteData.forEach(note => {
             // console.log(note.note.length);
-            const photoURLS = note.photos.map(data => data.url)
-            console.log(note.photos)
-            console.log(photoURLS)
+            const photoURLS = note.photos.map(data => data.url);
             if (note.note.length > 150) {
                 const noteMessage = note.photos.length > 0 ? 'Click Icon For Full Note and Photos!' : 'Click Icon For Full Note!';
                 const newNoteLong = `

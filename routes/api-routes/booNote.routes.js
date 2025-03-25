@@ -85,4 +85,26 @@ noteRouter.put('/edit', (req, res) => {
     )
 });
 
+
+noteRouter.put('/deletePhoto', (req, res) => {
+    // console.log(req.body);
+    const { id, photos } = req.body;
+    // console.log({id, note, signature });
+    CurrentBday.findByIdAndUpdate(
+        { _id: id },
+        { $set: { photos: photos } },
+        { new: true },
+        (err, note) => {
+            if (err) res.status(500).json(
+                handleError('Error Has Occurred in Database Search', '/api/boo-note/all', err, true)
+            );
+            if (note) {
+                res.status(200).json(
+                    handleError('Successfully Saved Note', '/api/boo-note/new', err, false)
+                );
+            }
+        }
+    )
+});
+
 module.exports = noteRouter;
