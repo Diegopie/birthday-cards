@@ -96,6 +96,14 @@ input[type="file"] {
     padding: 10px 38px 20px 38px;
     border-radius: 8px;
     text-align: center;
+
+    div {
+        width: 80%
+    }
+
+    button {
+        width: 100%
+    }
 }
 
 /* Submit/Validate */
@@ -195,8 +203,12 @@ input[type="file"] {
     font: 3vmin/1.0 Serif;
 
     @media screen and (min-width: 768px) {
-        h2, #img-target { 
+        h2 { 
             padding: 0 3rem;
+        }
+
+        #img-target { 
+            padding: 0 6.5rem;
         }
 
         min-width: 620px;
@@ -278,13 +290,24 @@ input[type="file"] {
 
 /* Earthy Friend */
 .note-earthyFriends {
-    background-color: rgba(253, 211, 113, 0.8);
-    color: rgb(2197, 116, 64);
+    background-color: rgba(153, 180, 120, 0.8);
+    color: #202020;
 }
 
 .note-earthyFriends-solid {
-    background-color: rgba(253, 211, 113, 1.0);
-    color: rgb(2197, 116, 64);
+    background-color: rgba(153, 180, 120, 1.0);
+    color: #202020;
+}
+
+/* Gym Gals */
+.note-gymGals {
+    background-color: rgba(180, 105, 200, 0.8);
+    color: white;
+}
+
+.note-gymGals-solid {
+    background-color: rgba(180, 105, 200, 1.0);
+    color: white;
 }
 
 /* View Notes Page */

@@ -110,6 +110,19 @@ const setEarthyFriends = (e) => {
 }
 $('#earthyFriends').click(setEarthyFriends);
 
+const setGymGals = (e) => {
+    // e.preventDefault();
+    // Change Color
+    $('#change').removeClass(currentClass);
+    $('#change').addClass("note-gymGals");
+    currentClass = "note-gymGals";
+    // Change Image
+    $('.img').attr('src', imgPath + 'gymGals.jpg');
+    dbStyle = ["note-gymGals", "gymGals.jpg"];
+    setLocal();
+}
+$('#gymGals').click(setGymGals);
+
 // * Submit Listener: Validate textareas; Make POST Req; Handle Success and Fail
 $('#submit').click(async e => {
     e.preventDefault();
@@ -242,6 +255,12 @@ function checkLocal() {
             break;
         case 'note-fieryAries':
             setFieryAries();
+            break;
+        case 'note-earthyFriends':
+            setEarthyFriends();
+            break;
+        case 'note-gymGals':
+            setGymGals();
             break;
     }
     $('#draftMsg').text('Draft Found!');
